@@ -1,0 +1,19 @@
+.calculator{
+  border: 1px solid black;
+  width: 250px;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+}
+
+.btnsContainer{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn{
+  width: 30%;
+  margin: 3px;
+  height: 35px;
+}

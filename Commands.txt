@@ -1,0 +1,11 @@
+<----------- Commands ----------->
+
+1. npm create vite@latest (For creating Folder)
+2. cd (app name) (For going back one step)
+3. npm install (For download all dependencies)
+4. npm run dev (To run the file on Server)
+5. npm i bootstrap (to install bootstrap) 
+6. import bootstrap into "main.jsx" file.
+   (import 'bootstrap/dist/css/bootstrap.min.css')
+7. Remove index.css
+8. Remove app.css
