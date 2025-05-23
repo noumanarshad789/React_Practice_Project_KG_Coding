@@ -8,9 +8,16 @@ function App() {
 
   const [todoItem, setTodoItem] = useState([])
   const handleNewTodo = (todoName, todoDate) => {
-    const newTodoItem = [...todoItem, { name: todoName, dueDate: todoDate }]
-    console.log(todoName, todoDate)
-    setTodoItem(newTodoItem)
+    //// Using of Spread Operator
+    // const newTodoItem = [...todoItem, { name: todoName, dueDate: todoDate }]
+    // console.log(todoName, todoDate)
+    // setTodoItem(newTodoItem)
+
+    // Functional Updates
+    setTodoItem((curTodo)=>{
+      const newTodoItem= [...curTodo,{ name: todoName, dueDate: todoDate }]
+      return newTodoItem
+    })
   }
 
   const handleDeleteTodo = (todoName) => {
