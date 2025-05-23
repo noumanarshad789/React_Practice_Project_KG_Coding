@@ -13,9 +13,9 @@ function App() {
     // console.log(todoName, todoDate)
     // setTodoItem(newTodoItem)
 
-    // Functional Updates
-    setTodoItem((curTodo)=>{
-      const newTodoItem= [...curTodo,{ name: todoName, dueDate: todoDate }]
+    // Functional Updates (It avoids error)
+    setTodoItem((curTodo) => {
+      const newTodoItem = [...curTodo, { name: todoName, dueDate: todoDate }]
       return newTodoItem
     })
   }
@@ -28,7 +28,7 @@ function App() {
   return <>
     <AppName></AppName>
     <AddTodo addNewTodo={handleNewTodo}></AddTodo>
-    {todoItem.length<=0 && <h1 className="text-md text-center mt-5 text-bold">Enjoy today because no task is left.</h1>}
+    {todoItem.length <= 0 && <h1 className="text-md text-center mt-5 text-bold">Enjoy today because no task is left.</h1>}
     <TodoItems todoItems={todoItem} deleteTodo={handleDeleteTodo} ></TodoItems>
   </>
 }
