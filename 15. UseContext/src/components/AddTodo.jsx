@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MdAddTask } from "react-icons/md";
+import { Context } from "../store/Context";
 
-const AddTodo = ({addNewTodo}) => {
+const AddTodo = () => {
 
+  const {handleNewTodo} = useContext(Context)
   const [todoName, setTodoName] = useState()
   const [todoDate, setTodoDate] = useState()
 
   const addNewTodoItem = () => {
-    addNewTodo(todoName,todoDate)
+    handleNewTodo(todoName,todoDate)
     setTodoName("")
     setTodoDate("")
   }
