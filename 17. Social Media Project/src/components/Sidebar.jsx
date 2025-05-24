@@ -1,6 +1,6 @@
 import React from "react";
 
-const Sidebar = () => {
+const Sidebar = ({selectedTodo, setSelectedTodo}) => {
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar"
@@ -19,16 +19,16 @@ const Sidebar = () => {
       <hr />
 
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page">
+        <li className="nav-item" onClick={()=>{setSelectedTodo("Home")}}>
+          <a href="#" className={`nav-link text-white ${selectedTodo==="Home" && "active"}`}  aria-current="page">
             <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
               <use xlinkHref="#home" />
             </svg>
             Home
           </a>
         </li>
-        <li>
-          <a href="#" className="nav-link text-white">
+        <li onClick={()=>{setSelectedTodo("Create Post")}}>
+          <a href="#" className={`nav-link text-white ${selectedTodo==="Create Post" && "active"}`}>
             <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
               <use xlinkHref="#speedometer2" />
             </svg>

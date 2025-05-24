@@ -3,14 +3,23 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./components/Sidebar";
+import CreatePost from "./components/CreatePost";
+import PostList from "./components/PostList";
+import { useState } from "react";
 
 function App() {
+  const [selectedTodo, setSelectedTodo] = useState("Home");
+
   return (
     <div className="app-component">
-      <Sidebar></Sidebar>
+      <Sidebar selectedTodo={selectedTodo} setSelectedTodo={setSelectedTodo}></Sidebar>
       <div className="content">
         <Header></Header>
-        <main></main>
+        {selectedTodo === "Home" ? (
+          <PostList></PostList>
+        ) : (
+          <CreatePost></CreatePost>
+        )}
         <Footer></Footer>
       </div>
     </div>
