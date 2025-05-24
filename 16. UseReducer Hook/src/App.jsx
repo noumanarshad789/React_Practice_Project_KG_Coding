@@ -1,6 +1,7 @@
 import AddTodo from "./components/AddTodo";
 import AppName from "./components/AppName";
 import TodoItems from "./components/TodoItems";
+import { Welcome } from "./components/Welcome";
 import TodoContext from "./store/Context";
 // import todoContext from "./store/Context";
 
@@ -10,7 +11,7 @@ function App() {
       <TodoContext>
         <AppName></AppName>
         <AddTodo></AddTodo>
-        
+        <Welcome></Welcome>
         <TodoItems></TodoItems>
       </TodoContext>
     </>
@@ -19,9 +20,3 @@ function App() {
 
 export default App;
 
-
-// {todoItem.length <= 0 && (
-//           <h1 className="text-md text-center mt-5 text-bold">
-//             Enjoy today because no task is left.
-//           </h1>
-//         )}
