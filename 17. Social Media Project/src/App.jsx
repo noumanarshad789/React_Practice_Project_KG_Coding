@@ -6,23 +6,29 @@ import Sidebar from "./components/Sidebar";
 import CreatePost from "./components/CreatePost";
 import PostList from "./components/PostList";
 import { useState } from "react";
+import TodoContextProvider from "./store/TodoContext";
 
 function App() {
   const [selectedTodo, setSelectedTodo] = useState("Home");
 
   return (
-    <div className="app-component">
-      <Sidebar selectedTodo={selectedTodo} setSelectedTodo={setSelectedTodo}></Sidebar>
-      <div className="content">
-        <Header></Header>
-        {selectedTodo === "Home" ? (
-          <PostList></PostList>
-        ) : (
-          <CreatePost></CreatePost>
-        )}
-        <Footer></Footer>
+    <TodoContextProvider>
+      <div className="app-component">
+        <Sidebar
+          selectedTodo={selectedTodo}
+          setSelectedTodo={setSelectedTodo}
+        ></Sidebar>
+        <div className="content">
+          <Header></Header>
+          {selectedTodo === "Home" ? (
+            <PostList></PostList>
+          ) : (
+            <CreatePost></CreatePost>
+          )}
+          <Footer></Footer>
+        </div>
       </div>
-    </div>
+    </TodoContextProvider>
   );
 }
 
