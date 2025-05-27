@@ -4,6 +4,7 @@ export const TodoContext = createContext({
   postList: [],
   addPost: () => {},
   deletePost: () => {},
+  addDumyPosts: () => {},
 });
 
 const reducer = (currPostList, action) => {
@@ -11,11 +12,12 @@ const reducer = (currPostList, action) => {
 
   if (action.type === "DELETE_POST") {
     newPostList = currPostList.filter(
-      (delPost) => delPost.postId !== action.payload.postId
+      (delPost) => delPost.id !== action.payload.postId
     );
-  }
-  else if (action.type === "ADD_POST") {
-    newPostList = [action.payload, ...currPostList]
+  } else if (action.type === "ADD_DUMY _POSTS") {
+    newPostList = action.payload.posts;
+  } else if (action.type === "ADD_POST") {
+    newPostList = [action.payload, ...currPostList];
   }
 
   return newPostList;
@@ -24,17 +26,23 @@ const reducer = (currPostList, action) => {
 const TodoContextProvider = ({ children }) => {
   const [postList, dispatch] = useReducer(reducer, []);
 
-  const addPost = (userId, postBody, postTitle, reactions, tags) => {
+  const addPost = (userId, body, title, reactions, tags) => {
     dispatch({
       type: "ADD_POST",
       payload: {
-        postId: (((1+Math.random())*0x10000)|0).toString(16).substring(1),
+        id: (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1),
         userId: userId,
-        postTitle: postTitle,
-        postBody:postBody,
+        title: title,
+        body: body,
         reactions: reactions,
         tags: tags,
       },
+    });
+  };
+  const addDumyPosts = (posts) => {
+    dispatch({
+      type: "ADD_DUMY _POSTS",
+      payload: { posts },
     });
   };
 
@@ -48,11 +56,12 @@ const TodoContextProvider = ({ children }) => {
   };
 
   return (
-    <TodoContext.Provider value={{ postList, addPost, deletePost }}>
+    <TodoContext.Provider
+      value={{ postList, addPost, deletePost, addDumyPosts }}
+    >
       {children}
     </TodoContext.Provider>
   );
 };
-
 
 export default TodoContextProvider;
