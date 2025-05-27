@@ -11,28 +11,24 @@ const PostList = () => {
   useEffect(() => {
     setIsAppLoading(true);
     // console.log(isAppLoading)
-    fetch("https://dummyjson.com/posts")
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    fetch("https://dummyjson.com/posts", {signal})
       .then((res) => res.json())
       .then((data) => {
         addDumyPosts(data.posts);
         setIsAppLoading(false);
+        // console.log(isAppLoading)
       });
-    // console.log(isAppLoading)
-  }, []);
 
-  // useEffect(() => {
-  //   setIsAppLoading(true);
-  //   fetch("https://dummyjson.com/posts")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       addDumyPosts(data.posts);
-  //       setIsAppLoading(false); // ✅ Now it's placed correctly
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching posts:", error);
-  //       setIsAppLoading(false); // ✅ Handle errors gracefully
-  //     });
-  // }, []);
+      return(
+        () => {
+          controller.abort();
+        }
+      )
+  }, []);
 
   return (
     <>
