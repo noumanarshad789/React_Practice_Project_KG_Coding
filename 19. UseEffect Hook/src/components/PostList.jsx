@@ -1,44 +1,47 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "./Post";
 import { TodoContext } from "../store/TodoContext";
+import NoPostMessage from "./NoPostMessage";
+import Loader from "./Loader";
 
 const PostList = () => {
   const { postList, addDumyPosts } = useContext(TodoContext);
+  const [isAppLoading, setIsAppLoading] = useState(false);
 
   useEffect(() => {
+    setIsAppLoading(true);
+    // console.log(isAppLoading)
     fetch("https://dummyjson.com/posts")
       .then((res) => res.json())
-      // .then(console.log)
-      .then((data) => addDumyPosts(data.posts));
+      .then((data) => {
+        addDumyPosts(data.posts);
+        setIsAppLoading(false);
+      });
+    // console.log(isAppLoading)
   }, []);
 
-
-
-  if (postList.length === 0) {
-    return (
-      <div
-        className="text-center p-5"
-        style={{ backgroundColor: "#f9f9f9", borderRadius: "12px" }}
-      >
-        <h2 className="text-primary">No posts available</h2>
-        <p className="lead">
-          Why not create your first post and share something awesome?
-        </p>
-        <br />
-        <img
-          src="https://illustrations.popsy.co/gray/web-design.svg"
-          alt="Create Post"
-          style={{ maxWidth: "300px", marginTop: "20px" }}
-        />
-      </div>
-    );
-  }
+  // useEffect(() => {
+  //   setIsAppLoading(true);
+  //   fetch("https://dummyjson.com/posts")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       addDumyPosts(data.posts);
+  //       setIsAppLoading(false); // ✅ Now it's placed correctly
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching posts:", error);
+  //       setIsAppLoading(false); // ✅ Handle errors gracefully
+  //     });
+  // }, []);
 
   return (
     <>
-      {postList.map((post, index) => (
-        <Post key={index} post={post} />
-      ))}
+      {isAppLoading && <Loader />}
+      {!isAppLoading && postList.length === 0 && (
+        <NoPostMessage postList={postList} />
+      )}
+      {!isAppLoading &&
+        postList.map((post, index) => <Post key={index} post={post} />)}
     </>
   );
 };
