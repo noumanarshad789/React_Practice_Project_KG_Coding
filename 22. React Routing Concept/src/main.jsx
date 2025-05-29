@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PostList, { postLoader } from "./components/PostList.jsx";
-import CreatePost from "./components/CreatePost.jsx";
+import CreatePost, { createPostAction } from "./components/CreatePost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -12,11 +12,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <PostList />, loader:postLoader
+        element: <PostList />,
+        loader: postLoader,
       },
       {
         path: "/create-post",
         element: <CreatePost />,
+        action: (createPostAction),
       },
     ],
   },
