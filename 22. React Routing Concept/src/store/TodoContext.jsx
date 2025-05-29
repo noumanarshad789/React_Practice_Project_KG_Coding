@@ -26,7 +26,7 @@ const reducer = (currPostList, action) => {
 const TodoContextProvider = ({ children }) => {
   const [postList, dispatch] = useReducer(reducer, []);
 
-  const [isAppLoading, setIsAppLoading] = useState(false);
+  // const [isAppLoading, setIsAppLoading] = useState(false);
 
   const addPost = (post) => {
     dispatch({
@@ -50,29 +50,29 @@ const TodoContextProvider = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    setIsAppLoading(true);
-    // console.log(isAppLoading)
+  // useEffect(() => {
+  //   setIsAppLoading(true);
+  //   // console.log(isAppLoading)
 
-    const controller = new AbortController();
-    const signal = controller.signal;
+  //   const controller = new AbortController();
+  //   const signal = controller.signal;
 
-    fetch("https://dummyjson.com/posts", { signal })
-      .then((res) => res.json())
-      .then((data) => {
-        addDumyPosts(data.posts);
-        setIsAppLoading(false);
-        // console.log(isAppLoading)
-      });
+  //   fetch("https://dummyjson.com/posts", { signal })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       addDumyPosts(data.posts);
+  //       setIsAppLoading(false);
+  //       // console.log(isAppLoading)
+  //     });
 
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  //   return () => {
+  //     controller.abort();
+  //   };
+  // }, []);
 
   return (
     <TodoContext.Provider
-      value={{ postList, addPost, deletePost, isAppLoading }}
+      value={{ postList, addPost, deletePost }}
     >
       {children}
     </TodoContext.Provider>

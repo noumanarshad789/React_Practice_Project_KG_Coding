@@ -1,8 +1,10 @@
 import React, { useContext, useRef } from "react";
 import { TodoContext } from "../store/TodoContext";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const { addPost } = useContext(TodoContext);
+  const navigate = useNavigate();
 
   const userIdElement = useRef();
   const postTitleElement = useRef();
@@ -18,7 +20,6 @@ const CreatePost = () => {
     const postBody = postBodyElement.current.value;
     const reactions = reactionsElement.current.value;
     const tags = tagsElement.current.value.split(" ");
-
 
     userIdElement.current.value = "";
     postTitleElement.current.value = "";
@@ -38,7 +39,10 @@ const CreatePost = () => {
       }),
     })
       .then((res) => res.json())
-      .then((post)=>addPost(post));
+      .then((post) => {
+        addPost(post);
+        navigate("/");
+      });
   };
 
   return (
